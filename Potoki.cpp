@@ -47,6 +47,7 @@ void bar (mutex& mtx, FILE* in2, FILE* out, FILE *in)
 			{fprintf(in2,"%s%s",str,"\n"); break;}
 		}
 		fclose(out);
+		cout << "POTOK1"<< endl;
 		mtx.unlock();
 		usleep(50000);
 	}
@@ -84,6 +85,7 @@ void foo (mutex& mtx, FILE *in3, FILE *out, FILE *in4)
 			{fprintf(in4,"%s%s",str,"\n"); break;}
 		}
 		fclose(out);
+		cout << "POTOK2"<< endl;
 		mtx.unlock();
 		usleep(50000);
 	}			
