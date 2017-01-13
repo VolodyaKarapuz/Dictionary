@@ -7,41 +7,12 @@
 #include <fstream>
 #include <math.h>
 #include <stdlib.h>
+#include <thread>
+#include <mutex>
+#include <unistd.h> 
 
 
 using namespace std;
-
-
-
-
-
-int main (int argc, char* argv[])
-{
-	mutex mtx;
-	
-	FILE *in, *out, *in2, *in3, *in4;
-	char str[50], str2[50];
-	char *n, *n1;
-	int fl=0;
-	in = fopen ("in.txt","r+");
-	out = fopen ("out.txt","r+");
-	in2 = fopen ("in2.txt", "r+");
-	in3 = fopen ("in3.txt", "r+");
-	in4 = fopen ("in4.txt", "r+");
-
-
-	thread t1 (foo, ref(mtx), ref(in), ref(out), ref(in2));
-	thread t2 (bar, ref(mtx), ref(in3), ref(out), ref(in4));
-
-	t1.join();
-	t2.join();
-	fclose(in);
-	fclose(in2);
-	fclose(out);
-	fclose(in3);
-	fclose(in4);
-}
-
 
 
 
@@ -118,3 +89,35 @@ void foo (mutex& mtx, FILE *in3, FILE *out, FILE *in4)
 	}			
 	
 }
+
+
+int main (int argc, char* argv[])
+{
+	mutex mtx;
+	
+	FILE *in, *out, *in2, *in3, *in4;
+	char str[50], str2[50];
+	char *n, *n1;
+	int fl=0;
+	in = fopen ("in.txt","r+");
+	out = fopen ("out.txt","r+");
+	in2 = fopen ("in2.txt", "r+");
+	in3 = fopen ("in3.txt", "r+");
+	in4 = fopen ("in4.txt", "r+");
+
+
+	thread t1 (foo, ref(mtx), ref(in), ref(out), ref(in2));
+	thread t2 (bar, ref(mtx), ref(in3), ref(out), ref(in4));
+
+	t1.join();
+	t2.join();
+	fclose(in);
+	fclose(in2);
+	fclose(out);
+	fclose(in3);
+	fclose(in4);
+}
+
+
+
+
