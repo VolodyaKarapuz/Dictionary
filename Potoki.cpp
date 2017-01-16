@@ -101,11 +101,11 @@ int main (int argc, char* argv[])
 	char str[50], str2[50];
 	char *n, *n1;
 	int fl=0;
-	in = fopen ("in.txt","r+");
-	out = fopen ("out.txt","r+");
-	in2 = fopen ("in2.txt", "r+");
-	in3 = fopen ("in3.txt", "r+");
-	in4 = fopen ("in4.txt", "r+");
+	out = fopen (argv[1],"r+");
+	in = fopen (argv[2],"r+");
+	in2 = fopen (argv[3], "r+");
+	in3 = fopen (argv[4], "r+");
+	in4 = fopen (argv[5], "r+");
 
 
 	thread t1 (foo, ref(mtx), ref(in), ref(out), ref(in2));
@@ -119,7 +119,3 @@ int main (int argc, char* argv[])
 	fclose(in3);
 	fclose(in4);
 }
-
-
-
-
